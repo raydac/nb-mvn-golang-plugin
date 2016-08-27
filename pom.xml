@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.igormaznitsa</groupId>
+  <artifactId>nb-mvn-golang-plugin</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>nbm</packaging>
+
+  <name>NB MVN-Golang plug-in</name>
+  <description>Small NetBeans IDE plugin to provide templates for maven based Golang projects and base files.</description>
+      
+  <properties>
+    <nb.platform>RELEASE81</nb.platform>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <inceptionYear>2016</inceptionYear>
+      
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>raydac</id>
+      <name>Igor Maznitsa</name>
+      <email>rrg4400@gmail.com</email>
+      <url>http://www.igormaznitsa.com</url>
+      <timezone>+3</timezone>
+      <roles>
+        <role>developer</role>
+      </roles>
+    </developer>
+  </developers>
+
+  <organization>
+    <name>Igor Maznitsa</name>
+    <url>http://www.igormaznitsa.com</url>
+  </organization>
+  
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>nbm-maven-plugin</artifactId>
+        <version>4.0</version>
+        <extensions>true</extensions>
+        <configuration>
+          <requiresRestart>true</requiresRestart>
+          <licenseFile>src/main/nbm/LICENSE-2.0.txt</licenseFile>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.3</version>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.6</version>
+        <configuration>
+          <useDefaultManifestFile>true</useDefaultManifestFile>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <repositories>
+    <repository>
+      <id>netbeans</id>
+      <name>Repository hosting NetBeans modules</name>
+      <url>http://bits.netbeans.org/nexus/content/groups/netbeans</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+  <dependencies>
+    <dependency>
+      <groupId>org.netbeans.api</groupId>
+      <artifactId>org-netbeans-api-annotations-common</artifactId>
+      <version>${nb.platform}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.netbeans.api</groupId>
+      <artifactId>org-netbeans-api-templates</artifactId>
+      <version>RELEASE81</version>
+    </dependency>
+    <dependency>
+      <groupId>org.netbeans.api</groupId>
+      <artifactId>org-openide-filesystems</artifactId>
+      <version>RELEASE81</version>
+    </dependency>
+    <dependency>
+      <groupId>org.netbeans.api</groupId>
+      <artifactId>org-openide-loaders</artifactId>
+      <version>RELEASE81</version>
+    </dependency>
+    <dependency>
+      <groupId>org.netbeans.api</groupId>
+      <artifactId>org-openide-nodes</artifactId>
+      <version>${nb.platform}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.netbeans.api</groupId>
+      <artifactId>org-openide-util</artifactId>
+      <version>RELEASE81</version>
+    </dependency>
+    <dependency>
+      <groupId>org.netbeans.api</groupId>
+      <artifactId>org-openide-util-lookup</artifactId>
+      <version>RELEASE81</version>
+    </dependency>
+    <dependency>
+      <groupId>org.netbeans.api</groupId>
+      <artifactId>org-openide-util-ui</artifactId>
+      <version>RELEASE81</version>
+    </dependency>
+    <dependency>
+      <groupId>org.netbeans.api</groupId>
+      <artifactId>org-netbeans-modules-lexer</artifactId>
+      <version>${nb.platform}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.netbeans.api</groupId>
+      <artifactId>org-openide-windows</artifactId>
+      <version>${nb.platform}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.netbeans.api</groupId>
+      <artifactId>org-openide-text</artifactId>
+      <version>${nb.platform}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.netbeans.api</groupId>
+      <artifactId>org-openide-awt</artifactId>
+      <version>RELEASE81</version>
+    </dependency>
+    <dependency>
+      <groupId>org.netbeans.api</groupId>
+      <artifactId>org-openide-dialogs</artifactId>
+      <version>RELEASE81</version>
+    </dependency>
+    <dependency>
+      <groupId>org.netbeans.api</groupId>
+      <artifactId>org-netbeans-modules-projectuiapi</artifactId>
+      <version>RELEASE81</version>
+    </dependency>
+    <dependency>
+      <groupId>org.netbeans.api</groupId>
+      <artifactId>org-netbeans-modules-projectapi</artifactId>
+      <version>RELEASE81</version>
+    </dependency>
+  </dependencies>
+</project>
