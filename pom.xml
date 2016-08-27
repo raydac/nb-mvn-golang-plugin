@@ -51,7 +51,10 @@
         <extensions>true</extensions>
         <configuration>
           <requiresRestart>true</requiresRestart>
+          <licenseName>Apache License 2.0</licenseName>
           <licenseFile>src/main/nbm/LICENSE-2.0.txt</licenseFile>
+          <author>Igor Maznitsa</author>
+          <homePageUrl>https://github.com/raydac/nb-mvn-golang-plugin</homePageUrl>
         </configuration>
       </plugin>
       <plugin>
