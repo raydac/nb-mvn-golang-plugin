@@ -31,8 +31,8 @@ import org.openide.util.NbBundle.Messages;
 @Messages("MvnGolangProject_displayName=Golang Application")
 public class MvnGolangProjectWizardIterator implements WizardDescriptor./*Progress*/InstantiatingIterator {
 
-  public static final String WRAPPER_VERSION = "2.1.1";
-  public static final String SDK_VERSION = "1.7";
+  public static final String WRAPPER_VERSION = "2.1.2";
+  public static final String SDK_VERSION = "1.7.5";
 
   private int index;
   private WizardDescriptor.Panel[] panels;
@@ -68,9 +68,23 @@ public class MvnGolangProjectWizardIterator implements WizardDescriptor./*Progre
     props.put(MvnGolangProjectPanelVisual.STORE_VERSION, wiz.getProperty(MvnGolangProjectPanelVisual.STORE_VERSION));
     props.put(MvnGolangProjectPanelVisual.STORE_NAME, wiz.getProperty(MvnGolangProjectPanelVisual.STORE_NAME));
 
-    final FileObject template = Templates.getTemplate(wiz);
+    final InputStream archiveStream;
+    
+    switch((MvnGolangProjectPanelVisual.ProjectType)wiz.getProperty(MvnGolangProjectPanelVisual.STORE_PROJECT_TYPE)) {
+      case MULTI : {
+        archiveStream = MvnGolangProjectWizardIterator.class.getResourceAsStream("multimodulego.zip");
+      }break;
+      case NONCHOOSED :
+      case SINGLE : 
+      default: {
+       final FileObject defaultTemplate = Templates.getTemplate(wiz);
+       archiveStream = defaultTemplate.getInputStream();
+      }break;
+    }
+    
+    
     final FileObject dir = FileUtil.toFileObject(dirF);
-    unZipFile(template.getInputStream(), props, dir);
+    unZipFile(archiveStream, props, dir);
 
     // Always open top dir as a project:
     resultSet.add(dir);
@@ -124,6 +138,7 @@ public class MvnGolangProjectWizardIterator implements WizardDescriptor./*Progre
     this.wiz.putProperty(MvnGolangProjectPanelVisual.STORE_ARTIFACT_ID, null);
     this.wiz.putProperty(MvnGolangProjectPanelVisual.STORE_GROUP_ID, null);
     this.wiz.putProperty(MvnGolangProjectPanelVisual.STORE_VERSION, null);
+    this.wiz.putProperty(MvnGolangProjectPanelVisual.STORE_PROJECT_TYPE, MvnGolangProjectPanelVisual.ProjectType.SINGLE);
     this.wiz = null;
     panels = null;
   }
@@ -180,9 +195,8 @@ public class MvnGolangProjectWizardIterator implements WizardDescriptor./*Progre
         if (entry.isDirectory()) {
           FileUtil.createFolder(projectRoot, entry.getName());
         } else {
-          FileObject fo = FileUtil.createData(projectRoot, entry.getName());
-          if ("pom.xml".equals(entry.getName())) {
-            // Special handling for setting name of Ant-based projects; customize as needed:
+          final FileObject fo = FileUtil.createData(projectRoot, entry.getName());
+          if (entry.getName().equals("pom.xml") || entry.getName().endsWith("/pom.xml")) {
             filterPomXml(fo, str, projectRoot.getName(), props);
           } else {
             writeFile(str, fo);
