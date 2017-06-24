@@ -31,8 +31,8 @@ import org.openide.util.NbBundle.Messages;
 @Messages("MvnGolangProject_displayName=Golang Application")
 public class MvnGolangProjectWizardIterator implements WizardDescriptor./*Progress*/InstantiatingIterator {
 
-  public static final String WRAPPER_VERSION = "2.1.2";
-  public static final String SDK_VERSION = "1.7.5";
+  public static final String WRAPPER_VERSION = "2.1.4";
+  public static final String SDK_VERSION = "1.8.3";
 
   private int index;
   private WizardDescriptor.Panel[] panels;
